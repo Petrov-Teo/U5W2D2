@@ -30,16 +30,20 @@ public class AutorService {
         for (AutorePost autorePost : this.autorePostList) {
             if (autorePost.getId() == autoreId) {
                 found = autorePost;
-
             }
         }
         if (found == null) throw new NotFoundException(autoreId);
         return found;
     }
 
-    public AutorePost findByIdAndUpdite(int autoreId, AutorePost body) {
+    public AutorePost findByIdAndUpdate(int autoreId, AutorePost body) {
         AutorePost found = null;
-        findById(autoreId);
+        for (AutorePost autorePost : this.autorePostList) {
+            if (autorePost.getId() == autoreId) {
+                found = autorePost;
+            }
+        }
+        if (found == null) throw new NotFoundException(autoreId);
         found.setNome(body.getNome());
         found.setCognome(body.getCognome());
         found.setEmail(body.getEmail());
@@ -49,7 +53,15 @@ public class AutorService {
 
     public void findByIdAndDelete(int autoreId) {
         AutorePost found = null;
-        findById(autoreId);
-        this.autorePostList.remove(null);
+        for (AutorePost autorePost : this.autorePostList) {
+            if (autorePost.getId() == autoreId) {
+                found = autorePost;
+                break;
+            }
+        }
+        if (found == null) {
+            throw new NotFoundException(autoreId);
+        }
+        this.autorePostList.remove(found);
     }
 }

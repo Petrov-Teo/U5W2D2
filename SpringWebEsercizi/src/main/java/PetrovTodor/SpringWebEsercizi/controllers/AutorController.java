@@ -3,6 +3,7 @@ package PetrovTodor.SpringWebEsercizi.controllers;
 import PetrovTodor.SpringWebEsercizi.entities.AutorePost;
 import PetrovTodor.SpringWebEsercizi.services.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 2. POST http://localhost:3001/autors (+ body)
 3. GET  http://localhost:3001/autors/{autoreId}
 4. PUT http://localhost:3001/autors/{autoreId}
-5. DELETE http://localhost:3001/autors/{autoreId}
+
 
  */
 
@@ -42,4 +43,16 @@ public class AutorController {
         return autorService.findById(autoreId);
     }
 
+    //4. PUT http://localhost:3001/autors/{autoreId}
+    @PutMapping("/{autoreId}")
+    private AutorePost findByIdAndUpdate(@PathVariable int autoreId, @RequestBody AutorePost body) {
+        return autorService.findByIdAndUpdate(autoreId, body);
+    }
+    //5. DELETE http://localhost:3001/autors/{autoreId}
+
+    @DeleteMapping("/{autoreId}")
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private void findByIdAndDelete(@PathVariable int autoreId) {
+        autorService.findByIdAndDelete(autoreId);
+    }
 }
