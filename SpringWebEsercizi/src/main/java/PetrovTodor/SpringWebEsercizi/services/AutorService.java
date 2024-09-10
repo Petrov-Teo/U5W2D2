@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class AutorService {
@@ -17,6 +18,9 @@ public class AutorService {
     }
 
     public AutorePost saveAutorePost(AutorePost body) {
+        Random random = new Random();
+        body.setId(random.nextInt(99999));
+        body.setAvatar("http://localhost:3001/users/?name=" + body.getNome() + "+" + body.getCognome());
         this.autorePostList.add(body);
         return body;
     }
@@ -41,5 +45,11 @@ public class AutorService {
         found.setEmail(body.getEmail());
         found.setDataDiNascita(body.getDataDiNascita());
         return found;
+    }
+
+    public void findByIdAndDelete(int autoreId) {
+        AutorePost found = null;
+        findById(autoreId);
+        this.autorePostList.remove(null);
     }
 }
