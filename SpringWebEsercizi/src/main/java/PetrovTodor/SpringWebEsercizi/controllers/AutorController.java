@@ -12,6 +12,7 @@ import java.util.List;
 2. POST http://localhost:3001/autors (+ body)
 3. GET  http://localhost:3001/autors/{autoreId}
 4. PUT http://localhost:3001/autors/{autoreId}
+5. DELETE http://localhost:3001/autors/{autoreId}
 
 
  */
@@ -32,6 +33,7 @@ public class AutorController {
 
     // 2. POST http://localhost:3001/autors (+ body)
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     private AutorePost createAutore(@RequestBody AutorePost body) {
         return autorService.saveAutorePost(body);
     }
