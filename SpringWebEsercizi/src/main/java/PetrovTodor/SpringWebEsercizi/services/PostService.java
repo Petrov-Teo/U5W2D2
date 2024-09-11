@@ -23,7 +23,7 @@ public class PostService {
         if (body.getTempoDiLettura() == 0.0) {
             int wordCount = body.getContenuto().split(" ").length;
             double tempoDiLetturaStimato = (double) wordCount / 100;
-            body.setTempoDiLettura(tempoDiLetturaStimato); // Arrotonda a 2 decimali
+            body.setTempoDiLettura(tempoDiLetturaStimato);
         }
         postList.add(body);
         return body;
